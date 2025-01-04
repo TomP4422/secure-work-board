@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import authRoutes from './auth-routes.js';
-import apiRoutes from './api/index.js';
 import { authenticateToken } from '../middleware/auth.js';
+import authRoutes from './auth-routes.js';
 
 const router = Router();
 
+// Public routes
 router.use('/auth', authRoutes);
-// TODO: Add authentication to the API routes
-router.use('/api', apiRoutes);
+
+// Protected routes
+router.use('/tasks', authenticateToken);
 
 export default router;
